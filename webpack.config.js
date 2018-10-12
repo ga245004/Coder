@@ -4,7 +4,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: [],
+    entry: [
+        'webpack-hot-middleware/client', path.join(__dirname, 'src', 'index.js')
+    ],
     output: {
         path: path.join(__dirname, 'dist'),
         filename: "[name].js",
@@ -24,10 +26,12 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ["js", "jsx", "json"]
+        extensions: [".js", ".jsx", ".json"]
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new HtmlWebpackPlugin()
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, 'src', 'template.html')
+        })
     ]
 }
